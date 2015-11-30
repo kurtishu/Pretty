@@ -29,7 +29,7 @@ public class MainActivity extends ActivityPresenter<MainDelegate> {
     @Override
     protected void beforePause() {
         super.beforePause();
-        EventBus.getDefault().register(this);
+        //EventBus.getDefault().register(this);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class MainActivity extends ActivityPresenter<MainDelegate> {
     @Override
     protected void onDestroyView() {
         super.onDestroyView();
-        EventBus.getDefault().unregister(this);
+        //EventBus.getDefault().unregister(this);
     }
 
     private Handler mHandler = new Handler(){
