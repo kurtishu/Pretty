@@ -11,8 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="center"
+                android:background="@color/theme_color"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+        </android.support.design.widget.AppBarLayout>
+
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/refresh_layout"
+            android:layout_below="@id/toolbar_layout"
+            android:layout_marginTop="2dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -28,10 +46,11 @@
 
     <ListView
         android:id="@+id/listview"
-        android:layout_width="80dp"
+        android:layout_width="120dp"
         android:layout_height="match_parent"
-        android:layout_gravity="left"
-        android:background="#FFB5C5" />
+        android:layout_marginTop="58dp"
+        android:dividerHeight="2dp"
+        android:layout_gravity="left" />
 </android.support.v4.widget.DrawerLayout>
 
 

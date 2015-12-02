@@ -17,6 +17,6 @@ public class Gallery {
     public int size     ;//      图片多少张
 
     public String getImg() {
-        return Config.URL.IMAGE_HOST + img;
+        return Config.ISUSINGMOCKDATA ? img : Config.URL.IMAGE_HOST + img;
     }
 }

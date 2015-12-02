@@ -29,6 +29,7 @@ public class ClasslfyTask extends ExecutableThread{
 
             setPostMessage(ExecutableThread.EXECUTE_STATE_SUCCESS, galleryclasses);
         } catch (Exception e) {
+            Logger.e("Error message: " + e.toString());
             setPostMessage(ExecutableThread.EXECUTE_STATE_FAILURE, e.getMessage());
         }
     }
@@ -40,6 +41,7 @@ public class ClasslfyTask extends ExecutableThread{
 
     @Override
     public void postErrorToUI(String message) {
+        mHandler.sendEmptyMessage(ExecutableThread.EXECUTE_STATE_FAILURE);
         Logger.i("Error Message: %s" , message);
     }
 }

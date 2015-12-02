@@ -6,6 +6,8 @@ import android.os.Message;
 import com.dreamfactory.kurtishu.pretty.api.ImageService;
 import com.dreamfactory.kurtishu.pretty.api.entity.ImageList;
 import com.dreamfactory.kurtishu.pretty.api.entity.SearchEntity;
+import com.dreamfactory.kurtishu.pretty.config.Config;
+import com.dreamfactory.kurtishu.pretty.config.MockData;
 import com.dreamfactory.kurtishu.pretty.view.task.base.ExecutableThread;
 import com.orhanobut.logger.Logger;
 

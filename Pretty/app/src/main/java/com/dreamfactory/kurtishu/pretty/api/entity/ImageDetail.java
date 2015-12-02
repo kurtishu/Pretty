@@ -1,6 +1,7 @@
 package com.dreamfactory.kurtishu.pretty.api.entity;
 
 import com.dreamfactory.kurtishu.pretty.model.Gallery;
+import com.dreamfactory.kurtishu.pretty.model.Picture;
 
 import java.util.List;
 
@@ -17,6 +18,6 @@ public class ImageDetail {
     public int count;
     public int fcount;
     public int rcount;
-    public List<Gallery> list;
+    public List<Picture> list;
     public int size;
 }

@@ -16,6 +16,7 @@ public abstract class ActivityPresenter<T extends IDelegate> extends Activity {
             viewDelegate = getDeletageClass().newInstance();
             viewDelegate.create(getLayoutInflater(), null, savedInstanceState);
             setContentView(viewDelegate.getRootView());
+            initViews();
             bindListener();
         } catch (InstantiationException e) {
             e.printStackTrace();
@@ -62,6 +63,8 @@ public abstract class ActivityPresenter<T extends IDelegate> extends Activity {
     }
 
     protected abstract Class<T> getDeletageClass();
+
+    protected void initViews(){};
 
     protected void bindListener(){};
 }

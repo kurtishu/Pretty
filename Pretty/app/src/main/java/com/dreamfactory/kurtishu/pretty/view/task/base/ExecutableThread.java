@@ -10,7 +10,6 @@ public abstract  class ExecutableThread extends Thread implements ITaskExecute {
     private volatile boolean mIsCanceled = false;
     public static final int EXECUTE_STATE_SUCCESS = 1;
     public static final int EXECUTE_STATE_FAILURE = 0;
-    private int mErrorType = EXECUTE_STATE_SUCCESS;
 
     public void cancel() {
         setCanceled(true);
@@ -39,7 +38,6 @@ public abstract  class ExecutableThread extends Thread implements ITaskExecute {
         executeThread();
     }
 
-
     private void executeThread() {
 
         if (isCanceled()) {
@@ -52,7 +50,7 @@ public abstract  class ExecutableThread extends Thread implements ITaskExecute {
             return;
         }
 
-        if (mErrorType != EXECUTE_STATE_SUCCESS) {
+        if (mPostMessage.what != EXECUTE_STATE_SUCCESS) {
             postErrorToUI((String) getmPostMessage().obj);
         } else {
             postSuccessToUI(getmPostMessage());
