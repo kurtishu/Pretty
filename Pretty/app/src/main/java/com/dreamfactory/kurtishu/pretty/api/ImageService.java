@@ -25,25 +25,28 @@ import java.util.concurrent.TimeUnit;
  * Created by kurtishu on 11/30/15.
  */
 public class ImageService {
+    private static ImageService mInstance;
+    private ImageService() {
+        // Do nothing
+    }
+
+    public static ImageService getInstance() {
+        if (null == mInstance) {
+            synchronized (ImageService.class) {
+                if (null == mInstance) {
+                    mInstance = new ImageService();
+                }
+            }
+        }
+        return mInstance;
+    }
 
     OkHttpClient client = new OkHttpClient();
     Gson gson = new Gson();
 
 
     public List<Galleryclass> getClasslfy() throws Exception {
-
-        Request request = new Request.Builder().url(Config.URL.IMAGE_CLASSIFY).build();
-        client.setConnectTimeout(10, TimeUnit.SECONDS);
-        client.setReadTimeout(10, TimeUnit.SECONDS);
-        client.setWriteTimeout(10, TimeUnit.SECONDS);
-
-        String responseJson = null;
-        if (Config.ISUSINGMOCKDATA) {
-            responseJson = MockData.getFileString("classfly");
-        } else {
-            Response response = client.newCall(request).execute();
-            responseJson = response.body().string();
-        }
+        String responseJson = Config.ISUSINGMOCKDATA ? MockData.getFileString("classfly") : httpCore(Config.URL.IMAGE_CLASSIFY) ;
         Logger.json(responseJson);
         List<Galleryclass> classlfy = new ArrayList<Galleryclass>();
 
@@ -58,24 +61,15 @@ public class ImageService {
 
     public ImageList getList(SearchEntity searchEntity) throws IOException {
         String url = Config.URL.IMAGE_LIST;
-
         if (null != searchEntity) {
             if (-1 == searchEntity.id) {
                 url += "?page=" + searchEntity.page + "&rows=" + searchEntity.rows;
             } else {
                 url += "?id=" + searchEntity.id + "&page=" + searchEntity.page + "&rows=" + searchEntity.rows;
             }
-
         }
 
-        Request request = new Request.Builder().url(url).build();
-        String responseJson = null;
-        if (Config.ISUSINGMOCKDATA) {
-            responseJson = MockData.getFileString("imageList");
-        } else {
-            Response response = client.newCall(request).execute();
-            responseJson = response.body().string();
-        }
+        String responseJson = Config.ISUSINGMOCKDATA ? MockData.getFileString("imageList") : httpCore(url);
         Logger.json(responseJson);
         ImageList imageList = gson.fromJson(responseJson, ImageList.class);
 
@@ -90,14 +84,7 @@ public class ImageService {
             url += "?id=" + searchEntity.id + "&classify=" + searchEntity.classify + "&rows=" + searchEntity.rows;
         }
 
-        Request request = new Request.Builder().url(url).build();
-        String responseJson = null;
-        if (Config.ISUSINGMOCKDATA) {
-            responseJson = MockData.getFileString("imageNew");
-        } else {
-            Response response = client.newCall(request).execute();
-            responseJson = response.body().string();
-        }
+        String responseJson = Config.ISUSINGMOCKDATA ? MockData.getFileString("imageNew") : httpCore(url);
         Logger.json(responseJson);
         ImageList imageList = gson.fromJson(responseJson, ImageList.class);
 
@@ -107,16 +94,22 @@ public class ImageService {
     public ImageDetail getImageDetail(int id) throws IOException {
         String url = Config.URL.IMAGE_SHOW + "?id=" + id;
         Request request = new Request.Builder().url(url).build();
-        String responseJson = null;
-        if (Config.ISUSINGMOCKDATA) {
-            responseJson = MockData.getFileString("imageDetails");
-        } else {
-            Response response = client.newCall(request).execute();
-            responseJson = response.body().string();
-        }
+        String responseJson = Config.ISUSINGMOCKDATA ? MockData.getFileString("imageDetails") : httpCore(url);
         Logger.json(responseJson);
-
         ImageDetail detail = gson.fromJson(responseJson, ImageDetail.class);
         return detail;
+    }
+
+    private String httpCore(String url) throws IOException {
+        Request request = new Request.Builder().url(url).build();
+        client.setConnectTimeout(10, TimeUnit.SECONDS);
+        client.setReadTimeout(10, TimeUnit.SECONDS);
+        client.setWriteTimeout(10, TimeUnit.SECONDS);
+
+        Response response = client.newCall(request).execute();
+        if (null != response && response.isSuccessful()) {
+            return response.body().string();
+        }
+        return null;
     }
 }

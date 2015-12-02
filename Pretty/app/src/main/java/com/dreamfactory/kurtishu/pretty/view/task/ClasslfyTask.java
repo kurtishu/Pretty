@@ -25,7 +25,7 @@ public class ClasslfyTask extends ExecutableThread{
     public void runBackground() {
 
         try {
-            List<Galleryclass> galleryclasses = new ImageService().getClasslfy();
+            List<Galleryclass> galleryclasses = ImageService.getInstance().getClasslfy();
 
             setPostMessage(ExecutableThread.EXECUTE_STATE_SUCCESS, galleryclasses);
         } catch (Exception e) {
