@@ -1,5 +1,7 @@
 package com.dreamfactory.kurtishu.pretty.view.delegate;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -18,6 +20,13 @@ public abstract class BaseAppDelegate implements IDelegate {
     protected View rootView;
 
     public abstract int getRootLayoutId();
+
+    protected void initViews(Context context, Intent mIntent){};
+
+    @Override
+    public void initViewControllers(Context context, Intent mIntent) {
+        initViews(context, mIntent);
+    }
 
     @Override
     public void create(LayoutInflater inflater, ViewGroup container, Bundle b) {

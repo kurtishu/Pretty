@@ -34,12 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.dreamfactory.kurtishu.pretty.widget.LoadMoreRecyclerView
+            <space.sye.z.library.widget.RefreshRecyclerView
                 android:id="@+id/recyclerview_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="LinearLayoutManager"
-                tools:listitem="@layout/fragment_item" />
+                android:layout_height="match_parent"/>
 
         </android.support.v4.widget.SwipeRefreshLayout>
     </RelativeLayout>
@@ -48,7 +46,7 @@
         android:id="@+id/listview"
         android:layout_width="120dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="56dp"
         android:dividerHeight="2dp"
         android:layout_gravity="left" />
 </android.support.v4.widget.DrawerLayout>

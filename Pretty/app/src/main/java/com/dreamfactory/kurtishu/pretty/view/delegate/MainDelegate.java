@@ -1,6 +1,7 @@
 package com.dreamfactory.kurtishu.pretty.view.delegate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,18 +17,21 @@ import com.dreamfactory.kurtishu.pretty.api.entity.SearchEntity;
 import com.dreamfactory.kurtishu.pretty.db.DBManager;
 import com.dreamfactory.kurtishu.pretty.event.UpdateImageListEvent;
 import com.dreamfactory.kurtishu.pretty.view.adapter.ClasslfyAdapter;
-import com.dreamfactory.kurtishu.pretty.widget.LoadMoreRecyclerView;
 import com.dreamfactory.kurtishu.pretty.view.adapter.MyItemRecyclerViewAdapter;
 import com.orhanobut.logger.Logger;
 
 import de.greenrobot.event.EventBus;
+import space.sye.z.library.listener.OnLoadMoreListener;
+import space.sye.z.library.manager.RecyclerMode;
+import space.sye.z.library.manager.RecyclerViewManager;
+import space.sye.z.library.widget.RefreshRecyclerView;
 
 /**
  * Created by kurtishu on 11/30/15.
  */
 public class MainDelegate extends BaseAppDelegate implements View.OnClickListener {
 
-    private LoadMoreRecyclerView mRecyclerView;
+    private RefreshRecyclerView mRecyclerView;
     private SwipeRefreshLayout mRefreshLayout;
     private MyItemRecyclerViewAdapter mAdapter;
     private DrawerLayout mDrawerLayout;
@@ -37,10 +41,11 @@ public class MainDelegate extends BaseAppDelegate implements View.OnClickListene
         return R.layout.activity_main;
     }
 
-    public void initViews(Context context) {
+
+    @Override
+    public void initViews(Context context, Intent mIntent) {
 
         initClasslfyListView(context);
-
         Toolbar toolbar = get(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
 
@@ -54,31 +59,27 @@ public class MainDelegate extends BaseAppDelegate implements View.OnClickListene
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
                 Logger.i("setOnRefreshListener");
                 //更新第一页数据
-                mRefreshLayout.setRefreshing(false);
                 SearchEntity.getInstance().page = 1;
                 EventBus.getDefault().postSticky(new UpdateImageListEvent(false, SearchEntity.getInstance()));
 
             }
         });
 
-        // new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-
-        mRecyclerView.setAutoLoadMoreEnable(true);
-
-        mRecyclerView.setLoadMoreListener(new LoadMoreRecyclerView.LoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-                //加载下一页数据
-                Logger.i("onLoadMore");
-                mRefreshLayout.setRefreshing(false);
-                SearchEntity.getInstance().page += 1;
-                EventBus.getDefault().postSticky(new UpdateImageListEvent(false, SearchEntity.getInstance()));
-            }
-        });
+        mAdapter = new MyItemRecyclerViewAdapter();
+        RecyclerViewManager.with(mAdapter, new LinearLayoutManager(context))
+                .setMode(RecyclerMode.BOTTOM)
+                .setOnLoadMoreListener(new OnLoadMoreListener() {
+                    @Override
+                    public void onLoadMore() {
+                        //加载下一页数据
+                        Logger.i("onLoadMore");
+                        mRefreshLayout.setRefreshing(false);
+                        SearchEntity.getInstance().page += 1;
+                        EventBus.getDefault().postSticky(new UpdateImageListEvent(false, SearchEntity.getInstance()));
+                    }
+                }).into(mRecyclerView, context);
     }
 
 
@@ -97,7 +98,9 @@ public class MainDelegate extends BaseAppDelegate implements View.OnClickListene
             mRecyclerView.setAdapter(mAdapter);
         }
         mAdapter.addDatas(list.tngou);
-        mRecyclerView.notifyMoreFinish((list.total > mAdapter.getItemCount()) ? true : false);
+        mRefreshLayout.setRefreshing(false);
+        RecyclerViewManager.onRefreshCompleted();
+        RecyclerViewManager.notifyDataSetChanged();
     }
 
     public void clearRecyclerViewData() {

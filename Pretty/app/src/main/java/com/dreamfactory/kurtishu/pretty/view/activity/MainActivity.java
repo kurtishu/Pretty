@@ -30,23 +30,10 @@ public class MainActivity extends ActivityPresenter<MainDelegate> {
         return MainDelegate.class;
     }
 
-
     @Override
-    protected void initViews() {
-        super.initViews();
+    protected void afterCreate() {
+        super.afterCreate();
         EventBus.getDefault().registerSticky(this);
-        ((MainDelegate) viewDelegate).initViews(MainActivity.this);
-    }
-
-    @Override
-    protected void beforePause() {
-        super.beforePause();
-    }
-
-    @Override
-    protected void afterResume() {
-        super.afterResume();
-        Fresco.initialize(this);
         new SearchImagesTask(mHandler, null).start();
     }
 
@@ -61,7 +48,9 @@ public class MainActivity extends ActivityPresenter<MainDelegate> {
         public void handleMessage(Message msg) {
 
             if (msg.what == ExecutableThread.EXECUTE_STATE_SUCCESS) {
-                ((MainDelegate)viewDelegate).setRecyclerViewAdapter((ImageList) msg.obj);
+                if (null != msg.obj && null != getViewDelegate()) {
+                    getViewDelegate().setRecyclerViewAdapter((ImageList) msg.obj);
+                }
             }
 
             super.handleMessage(msg);
@@ -70,7 +59,7 @@ public class MainActivity extends ActivityPresenter<MainDelegate> {
 
     public void onEventMainThread(final UpdateImageListEvent event) {
         if (event.isShouldReload()) {
-            ((MainDelegate)viewDelegate).clearRecyclerViewData();
+            getViewDelegate().clearRecyclerViewData();
         }
 
         new SearchImagesTask(mHandler, event.getSearchEntity()).start();

@@ -13,6 +13,4 @@ public class SplashDelegate extends BaseAppDelegate{
         return R.layout.activity_splash;
     }
 
-
-
 }

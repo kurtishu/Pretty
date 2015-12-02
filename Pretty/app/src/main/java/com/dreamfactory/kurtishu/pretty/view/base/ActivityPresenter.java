@@ -3,12 +3,14 @@ package com.dreamfactory.kurtishu.pretty.view.base;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.orhanobut.logger.Logger;
+
 /**
  * Created by kurtishu on 11/30/15.
  */
 public abstract class ActivityPresenter<T extends IDelegate> extends Activity {
 
-    protected T viewDelegate;
+    private T viewDelegate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,22 +18,20 @@ public abstract class ActivityPresenter<T extends IDelegate> extends Activity {
             viewDelegate = getDeletageClass().newInstance();
             viewDelegate.create(getLayoutInflater(), null, savedInstanceState);
             setContentView(viewDelegate.getRootView());
-            initViews();
-            bindListener();
+            viewDelegate.initViewControllers(this, getIntent());
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            Logger.e("InstantiationException" + e.getMessage());
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            Logger.e("IllegalAccessException" + e.getMessage());
         }
+        afterCreate();
     }
 
-    @Override
-    protected final void onPause() {
-        beforePause();
-        super.onPause();
+    protected T getViewDelegate() {
+        return viewDelegate;
     }
 
-    protected void beforePause(){}
+    protected void afterCreate(){}
 
     @Override
     protected final void onResume() {
@@ -63,8 +63,4 @@ public abstract class ActivityPresenter<T extends IDelegate> extends Activity {
     }
 
     protected abstract Class<T> getDeletageClass();
-
-    protected void initViews(){};
-
-    protected void bindListener(){};
 }

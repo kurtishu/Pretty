@@ -30,10 +30,6 @@ public class ImageDetailActivity extends ActivityPresenter<ImageDetailDelegate> 
         super.afterResume();
 
         int id = getIntent().getExtras().getInt("id");
-        String url = getIntent().getExtras().getString("img");
-
-        ((ImageDetailDelegate)viewDelegate).initViews(ImageDetailActivity.this, url);
-
         Logger.i("id = " + id);
 
         new ImageDetailTask(mHandler, id).start();
@@ -44,8 +40,10 @@ public class ImageDetailActivity extends ActivityPresenter<ImageDetailDelegate> 
         public void handleMessage(Message msg) {
 
             if (msg.what == ExecutableThread.EXECUTE_STATE_SUCCESS) {
-                ImageDetail imageDetail = (ImageDetail)msg.obj;
-                ((ImageDetailDelegate) viewDelegate).updateData(imageDetail.list);
+                if (null !=  msg.obj) {
+                    ImageDetail imageDetail = (ImageDetail) msg.obj;
+                    getViewDelegate().updateData(imageDetail.list);
+                }
             }
             super.handleMessage(msg);
         }

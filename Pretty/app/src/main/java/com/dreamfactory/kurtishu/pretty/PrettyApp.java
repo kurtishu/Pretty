@@ -3,6 +3,7 @@ package com.dreamfactory.kurtishu.pretty;
 import android.app.Application;
 import android.content.Context;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.logger.Logger;
 
 /**
@@ -15,9 +16,8 @@ public class PrettyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         Logger.init();
-
+        Fresco.initialize(this);
         instance = this;
     }
 

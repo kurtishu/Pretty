@@ -15,6 +15,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +30,12 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
     private List<Gallery> mValues;
 
+    public MyItemRecyclerViewAdapter() {
+        mValues = new ArrayList<Gallery>();
+    }
+
     public MyItemRecyclerViewAdapter(List<Gallery> items) {
         mValues = items;
-
     }
 
     public void setData(List<Gallery> datas) {

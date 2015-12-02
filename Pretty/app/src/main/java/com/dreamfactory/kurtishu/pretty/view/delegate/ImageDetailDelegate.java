@@ -1,6 +1,7 @@
 package com.dreamfactory.kurtishu.pretty.view.delegate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,13 +34,14 @@ public class ImageDetailDelegate extends BaseAppDelegate implements View.OnClick
         return R.layout.activity_image_detail;
     }
 
-    public void initViews(Context context, String url) {
+    @Override
+    public void initViews(Context context, Intent mIntent) {
 
         fab = get(R.id.fab);
         fab.setOnClickListener(this);
         bgImageView = get(R.id.pretty_image_view);
         tvCount = get(R.id.count);
-        bgImageView.setImageURI(Uri.parse(url));
+        bgImageView.setImageURI(Uri.parse(mIntent.getExtras().getString("img")));
 
         mRecyclerViewPager = get(R.id.image_detail_list);
         LinearLayoutManager layout = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);

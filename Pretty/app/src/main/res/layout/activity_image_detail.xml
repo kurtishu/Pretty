@@ -17,6 +17,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:text="1/1"
+        android:gravity="center"
+        android:background="@drawable/bg_rectangle_with_stroke_dash"
         android:layout_gravity="top|end"/>
 
     <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
