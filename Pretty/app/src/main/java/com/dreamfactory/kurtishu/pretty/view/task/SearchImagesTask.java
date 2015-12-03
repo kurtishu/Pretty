@@ -28,7 +28,7 @@ public class SearchImagesTask extends ExecutableThread {
     @Override
     public void runBackground() {
         try {
-            ImageList list = new ImageService().getList(searchEntity);
+            ImageList list = ImageService.getInstance().getList(searchEntity);
             setPostMessage(ExecutableThread.EXECUTE_STATE_SUCCESS, list);
         } catch (Exception e) {
             setPostMessage(ExecutableThread.EXECUTE_STATE_FAILURE, e.getMessage());

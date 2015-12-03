@@ -2,6 +2,7 @@ package com.dreamfactory.kurtishu.pretty.view.delegate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -41,13 +42,13 @@ public class MainDelegate extends BaseAppDelegate implements View.OnClickListene
         return R.layout.activity_main;
     }
 
-
     @Override
     public void initViews(Context context, Intent mIntent) {
 
         initClasslfyListView(context);
         Toolbar toolbar = get(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
+        toolbar.setTitleTextColor(Color.WHITE);
 
         mDrawerLayout = get(R.id.drawerlayout);
         FloatingActionButton fab = get(R.id.fab);

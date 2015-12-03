@@ -22,7 +22,7 @@ public class ImageDetailTask extends ExecutableThread {
     @Override
     public void runBackground() {
         try {
-            ImageDetail imageDetail = new ImageService().getImageDetail(id);
+            ImageDetail imageDetail = ImageService.getInstance().getImageDetail(id);
             setPostMessage(EXECUTE_STATE_SUCCESS, imageDetail);
         } catch (Exception e) {
             setPostMessage(EXECUTE_STATE_FAILURE, e.getMessage());
