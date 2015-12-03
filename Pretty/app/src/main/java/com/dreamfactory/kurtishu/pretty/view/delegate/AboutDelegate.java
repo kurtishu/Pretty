@@ -21,33 +21,26 @@ package com.dreamfactory.kurtishu.pretty.view.delegate;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.util.SimpleArrayMap;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dreamfactory.kurtishu.pretty.BuildConfig;
 import com.dreamfactory.kurtishu.pretty.R;
+import com.dreamfactory.kurtishu.pretty.event.NavigatorEvent;
 
 import org.apache.commons.collections4.map.ListOrderedMap;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by kurtishu on 12/3/15.
  */
-public class AboutDelegate extends BaseAppDelegate {
+public class AboutDelegate extends BaseAppDelegate implements Toolbar.OnClickListener {
 
     @Override
     public int getRootLayoutId() {
@@ -59,7 +52,9 @@ public class AboutDelegate extends BaseAppDelegate {
         super.initViews(context, mIntent);
         Toolbar toolbar = get(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
+        toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.mipmap.ic_arrow_back);
+        toolbar.setNavigationOnClickListener(this);
 
         TextView textViewVersion = get(R.id.version);
         textViewVersion.setText(context.getString(R.string.version, BuildConfig.VERSION_NAME, BuildConfig.FLAVOR));
@@ -82,6 +77,11 @@ public class AboutDelegate extends BaseAppDelegate {
         dataMap.put("Realm", "https://realm.io");
 
         mRecyclerView.setAdapter(new LibraryAdapter(context, dataMap));
+    }
+
+    @Override
+    public void onClick(View v) {
+        EventBus.getDefault().post(new NavigatorEvent(null));
     }
 
     class LibraryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

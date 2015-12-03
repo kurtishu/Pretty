@@ -56,6 +56,7 @@ public class MainActivity extends ActivityPresenter<MainDelegate> {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_about) {
             startActivity(new Intent(this, AboutActivity.class));
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

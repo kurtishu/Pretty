@@ -18,17 +18,11 @@
 
 package com.dreamfactory.kurtishu.pretty.view.activity;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.view.View;
-
-import com.dreamfactory.kurtishu.pretty.R;
+import com.dreamfactory.kurtishu.pretty.event.NavigatorEvent;
 import com.dreamfactory.kurtishu.pretty.view.base.ActivityPresenter;
 import com.dreamfactory.kurtishu.pretty.view.delegate.AboutDelegate;
+
+import de.greenrobot.event.EventBus;
 
 public class AboutActivity extends ActivityPresenter<AboutDelegate> {
 
@@ -39,13 +33,18 @@ public class AboutActivity extends ActivityPresenter<AboutDelegate> {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                supportFinishAfterTransition();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEventMainThread(NavigatorEvent event) {
+        finish();
     }
 }
