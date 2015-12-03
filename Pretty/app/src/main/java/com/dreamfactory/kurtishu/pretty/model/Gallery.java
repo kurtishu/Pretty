@@ -5,7 +5,7 @@ import com.dreamfactory.kurtishu.pretty.config.Config;
 /**
  * Created by kurtishu on 11/30/15.
  */
-public class Gallery {
+public class Gallery extends Object implements Comparable<Gallery> {
 
     public int id;
     public int  galleryclass ;//          图片分类
@@ -18,5 +18,26 @@ public class Gallery {
 
     public String getImg() {
         return Config.ISUSINGMOCKDATA ? img : Config.URL.IMAGE_HOST + img;
+    }
+
+    @Override
+    public int compareTo(Gallery another) {
+        if (this.id > another.id) return 1;
+        return 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (!(o instanceof Gallery)) {
+            return false;
+        }
+
+        Gallery g = (Gallery)o;
+        if (g.id != this.id) {
+            return  false;
+        }
+
+        return super.equals(o);
     }
 }

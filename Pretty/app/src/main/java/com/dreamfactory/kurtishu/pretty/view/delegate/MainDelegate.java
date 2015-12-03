@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -49,6 +50,7 @@ public class MainDelegate extends BaseAppDelegate implements View.OnClickListene
         Toolbar toolbar = get(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
         toolbar.setTitleTextColor(Color.WHITE);
+        ((AppCompatActivity)context).setSupportActionBar(toolbar);
 
         mDrawerLayout = get(R.id.drawerlayout);
         FloatingActionButton fab = get(R.id.fab);

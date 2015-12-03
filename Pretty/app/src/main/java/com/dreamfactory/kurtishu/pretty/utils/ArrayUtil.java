@@ -1,5 +1,6 @@
 package com.dreamfactory.kurtishu.pretty.utils;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -8,12 +9,13 @@ import java.util.List;
  */
 public class ArrayUtil {
 
-    public static<T> void removeDuplicate(List<T> list)   {
+    public static<T extends Comparable<? super T>>void removeDuplicate(List<T> list)   {
         if (null == list || list.size() == 0) {
             return;
         }
-        HashSet<T> h  =   new HashSet<T>(list);
+        HashSet<T> h = new HashSet<T>(list);
         list.clear();
         list.addAll(h);
+        Collections.sort(list);
     }
 }

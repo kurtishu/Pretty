@@ -11,11 +11,13 @@ import com.dreamfactory.kurtishu.pretty.R;
 import com.dreamfactory.kurtishu.pretty.event.NavigatorEvent;
 import com.dreamfactory.kurtishu.pretty.model.Gallery;
 import com.dreamfactory.kurtishu.pretty.utils.ArrayUtil;
+import com.dreamfactory.kurtishu.pretty.utils.UniqueListArray;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,23 +30,22 @@ import de.greenrobot.event.EventBus;
  */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Gallery> mValues;
+    private UniqueListArray<Gallery> mValues;
 
     public MyItemRecyclerViewAdapter() {
-        mValues = new ArrayList<Gallery>();
+        mValues = new UniqueListArray<Gallery>();
     }
 
     public MyItemRecyclerViewAdapter(List<Gallery> items) {
-        mValues = items;
+        mValues = new UniqueListArray<Gallery>(items);
     }
 
-    public void setData(List<Gallery> datas) {
+    public void setData(UniqueListArray<Gallery> datas) {
         mValues = datas;
     }
 
     public void addDatas(List<Gallery> datas) {
-        mValues.addAll(datas);
-        ArrayUtil.removeDuplicate(mValues);
+        mValues.addAllWithSort(datas);
     }
 
     public void clearData() {

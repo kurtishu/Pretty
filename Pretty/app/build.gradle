@@ -6,15 +6,22 @@ android {
 
     defaultConfig {
         applicationId "com.dreamfactory.kurtishu.pretty"
-        minSdkVersion 17
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.2"
+        manifestPlaceholders = [CHANNEL_VALUE: "GitHub"]
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        github {
+            manifestPlaceholders = [CHANNEL_VALUE: "GitHub"]
         }
     }
 }
@@ -29,8 +36,8 @@ dependencies {
     compile 'com.facebook.fresco:imagepipeline-okhttp:0.5.0'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.github.orhanobut:logger:1.12'
-
     compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'org.apache.commons:commons-collections4:4.1'
     compile 'io.realm:realm-android:0.84.1'
     compile 'com.lsjwzh:recyclerviewpager:1.0.11-SNAPSHOT'
     compile 'com.github.Syehunter:RecyclerViewManager:0.1.1'

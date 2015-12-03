@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.activity.SplashActivity"
-            android:theme="@style/FullScreen">
+            android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -27,13 +27,12 @@
         </activity>
         <activity
             android:name=".view.activity.ImageDetailActivity"
-            android:label="@string/title_activity_image_detail"
-            android:theme="@style/FullScreen">
+            android:theme="@style/AppTheme.FullScreen">
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".view.activity.AboutActivity"
-            android:label="@string/title_activity_about"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

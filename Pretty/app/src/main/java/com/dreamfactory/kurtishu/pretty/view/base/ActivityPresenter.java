@@ -2,13 +2,14 @@ package com.dreamfactory.kurtishu.pretty.view.base;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.orhanobut.logger.Logger;
 
 /**
  * Created by kurtishu on 11/30/15.
  */
-public abstract class ActivityPresenter<T extends IDelegate> extends Activity {
+public abstract class ActivityPresenter<T extends IDelegate> extends AppCompatActivity {
 
     private T viewDelegate;
     @Override

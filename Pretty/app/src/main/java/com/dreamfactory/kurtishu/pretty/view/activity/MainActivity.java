@@ -3,7 +3,10 @@ package com.dreamfactory.kurtishu.pretty.view.activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import com.dreamfactory.kurtishu.pretty.R;
 import com.dreamfactory.kurtishu.pretty.api.ImageService;
 import com.dreamfactory.kurtishu.pretty.api.entity.ImageList;
 import com.dreamfactory.kurtishu.pretty.api.entity.SearchEntity;
@@ -41,6 +44,20 @@ public class MainActivity extends ActivityPresenter<MainDelegate> {
     protected void onDestroyView() {
         EventBus.getDefault().unregister(this);
         super.onDestroyView();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_about) {
+            startActivity(new Intent(this, AboutActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private Handler mHandler = new Handler(){
