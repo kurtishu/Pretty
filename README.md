@@ -6,18 +6,17 @@
 
 
 #####项目截图
-![启动图](https://github.com/KurtisHu/Pretty/blob/master/screenshots/splash.png) 
-![main](https://github.com/KurtisHu/Pretty/blob/master/screenshots/main.png)![Detail](https://github.com/KurtisHu/Pretty/blob/master/screenshots/details.png)
 
+<img src="https://github.com/KurtisHu/Pretty/blob/master/screenshots/main.png" width = "240" height = "400" alt="图片名称" align=center />
 
 
 #####本项目包含以下知识点
-square / okhttp 下载数据
-[facebook / fresco](https://github.com/facebook/fresco) 下载，展示网络图片
-orhanobut / logger 日志工具
-[RecyclerViewManager](https://github.com/Syehunter/RecyclerViewManager)/ [RecyclerViewPager](https://github.com/lsjwzh/RecyclerViewPager) 实现下拉刷新和翻页效果
-Android Design Support Library 中的 CoordinatorLayout
-[Realm](https://realm.io) 数据库
+square / okhttp 下载数据<br/>
+[facebook / fresco](https://github.com/facebook/fresco) 下载，展示网络图片.<br/>
+orhanobut / logger 日志工具.<br/>
+[RecyclerViewManager](https://github.com/Syehunter/RecyclerViewManager)/ [RecyclerViewPager](https://github.com/lsjwzh/RecyclerViewPager) 实现下拉刷新和翻页效果.<br/>
+Android Design Support Library 中的 CoordinatorLayout.<br/>
+[Realm](https://realm.io) 数据库.
 
 
 
