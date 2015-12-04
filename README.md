@@ -7,7 +7,7 @@
 
 ####项目截图
 
-<img src="https://github.com/KurtisHu/Pretty/blob/master/screenshots/main.png" width = "240" height = "400" alt="图片名称" align=center />
+<img src="https://github.com/KurtisHu/Pretty/blob/master/screenshots/main2.png" width = "240" height = "400" alt="图片名称" align=center />
 
 <img src="https://github.com/KurtisHu/Pretty/blob/master/screenshots/details.png" width = "240" height = "400" alt="图片名称" align=center />
 
