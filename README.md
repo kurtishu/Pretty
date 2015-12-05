@@ -1,7 +1,7 @@
 ##美图
 
 <br>
-本应用是学些了MVP看了《[MVPro](https://github.com/qibin0506/MVPro)》这个开源项目之后突发奇想的完成的。
+本应用是学些了MVP，并且看了《[MVPro](https://github.com/qibin0506/MVPro)》这个开源项目之后突发奇想的完成的。
 
 
 
