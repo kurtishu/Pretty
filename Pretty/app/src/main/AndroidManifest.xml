@@ -2,7 +2,10 @@
 <manifest package="com.dreamfactory.kurtishu.pretty"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:name=".PrettyApp"
@@ -34,6 +37,9 @@
             android:name=".view.activity.AboutActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
+        <meta-data android:value="566ac60467e58e8dc700328c" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="${CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>
     </application>
 
 </manifest>

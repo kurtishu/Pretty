@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.orhanobut.logger.Logger;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by kurtishu on 11/30/15.
@@ -34,14 +35,17 @@ public abstract class ActivityPresenter<T extends IDelegate> extends AppCompatAc
 
     protected void afterCreate(){}
 
-    @Override
-    protected final void onResume() {
+    public void onResume() {
         super.onResume();
         afterResume();
+        MobclickAgent.onResume(this);
+    }
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     protected void afterResume(){}
-
 
     @Override
     protected final void onDestroy() {
