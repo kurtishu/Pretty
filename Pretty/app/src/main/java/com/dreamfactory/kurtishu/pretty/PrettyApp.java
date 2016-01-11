@@ -2,6 +2,7 @@ package com.dreamfactory.kurtishu.pretty;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.StrictMode;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.logger.Logger;
@@ -16,6 +17,10 @@ public class PrettyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyLog().penaltyDialog().build());
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().build());
+
         Logger.init();
         Fresco.initialize(this);
         instance = this;
