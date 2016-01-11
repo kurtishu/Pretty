@@ -85,6 +85,8 @@ public class MainActivity extends ActivityPresenter<MainDelegate> {
     }
 
     public void onEventMainThread(NavigatorEvent event) {
+        // Check null
+        if (null == event) return;
 
         Map<String, ?> parmas = event.getParams();
         Intent intent = new Intent(this, ImageDetailActivity.class);

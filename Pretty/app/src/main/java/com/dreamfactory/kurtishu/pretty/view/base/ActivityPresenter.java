@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.dreamfactory.kurtishu.pretty.R;
+import com.dreamfactory.kurtishu.pretty.utils.StatusBarCompat;
 import com.orhanobut.logger.Logger;
 import com.umeng.analytics.MobclickAgent;
 
@@ -20,6 +22,7 @@ public abstract class ActivityPresenter<T extends IDelegate> extends AppCompatAc
             viewDelegate = getDeletageClass().newInstance();
             viewDelegate.create(getLayoutInflater(), null, savedInstanceState);
             setContentView(viewDelegate.getRootView());
+            StatusBarCompat.compat(this, getResources().getColor(R.color.theme_color));
             viewDelegate.initViewControllers(this, getIntent());
         } catch (InstantiationException e) {
             Logger.e("InstantiationException" + e.getMessage());

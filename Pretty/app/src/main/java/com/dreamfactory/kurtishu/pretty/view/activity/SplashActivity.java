@@ -44,14 +44,10 @@ public class SplashActivity extends ActivityPresenter<SplashDelegate> {
 
             if (msg.what == ExecutableThread.EXECUTE_STATE_SUCCESS) {
                 DBManager.saveClasslfy((List<Galleryclass>) msg.obj);
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
             }
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
             super.handleMessage(msg);
         }
     };

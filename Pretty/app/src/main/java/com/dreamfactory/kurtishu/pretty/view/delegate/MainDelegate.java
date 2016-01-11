@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
@@ -87,9 +89,49 @@ public class MainDelegate extends BaseAppDelegate implements View.OnClickListene
 
 
     private void initClasslfyListView(Context context) {
-        ListView classList = get(R.id.listview);
-        ClasslfyAdapter adapter = new ClasslfyAdapter(context, DBManager.getClasslfyList());
-        classList.setAdapter(adapter);
+        //ListView classList = get(R.id.listview);
+        //ClasslfyAdapter adapter = new ClasslfyAdapter(context, DBManager.getClasslfyList());
+        //classList.setAdapter(adapter);
+
+        NavigationView naView = (NavigationView) get(R.id.navigation_view);
+        naView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+
+                int id = 1;
+                switch (item.getItemId()) {
+                    case R.id.c1:
+                        id = 1;
+                        break;
+                    case R.id.c2:
+                        id = 2;
+                        break;
+                    case R.id.c3:
+                        id = 3;
+                        break;
+                    case R.id.c4:
+                        id = 4;
+                        break;
+                    case R.id.c5:
+                        id = 5;
+                        break;
+                    case R.id.c6:
+                        id = 6;
+                        break;
+                    case R.id.c7:
+                        id = 7;
+                        break;
+                }
+                toggleDrawerLayout();
+                SearchEntity searchEntity = SearchEntity.getInstance();
+                searchEntity.id = id;
+                searchEntity.page = 1;
+                searchEntity.rows = 20;
+                EventBus.getDefault().postSticky(new UpdateImageListEvent(true, searchEntity));
+                return true;
+            }
+        });
+
     }
 
     public void setRecyclerViewAdapter(ImageList list) {
