@@ -42,5 +42,4 @@ dependencies {
     compile 'com.lsjwzh:recyclerviewpager:1.0.11-SNAPSHOT'
     compile 'com.github.Syehunter:RecyclerViewManager:0.1.1'
     compile 'com.umeng.analytics:analytics:latest.integration'
-    compile 'com.bm.photoview:library:1.3.6'
 }

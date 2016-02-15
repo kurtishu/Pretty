@@ -17,46 +17,53 @@
   ~  */
   -->
 
-<FrameLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/theme_color"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark"
+    android:fitsSystemWindows="true">
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/pretty_image_view"
-        android:layout_gravity="center_horizontal"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/image_detail_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:scrollbars="none"/>
 
     <TextView
         android:id="@+id/count"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:text="1/1"
+        android:textColor="@android:color/white"
         android:gravity="center"
-        android:background="@drawable/bg_rectangle_with_stroke_dash"
-        android:layout_gravity="top|end"/>
-
-    <com.lsjwzh.widget.recyclerviewpager.RecyclerViewPager
-        android:layout_marginTop="20dp"
-        android:id="@+id/image_detail_list"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
-        android:paddingBottom="36dp"
-        app:triggerOffset="0.1"
-        app:singlePageFling="true"
-        android:clipToPadding="false"/>
-
-    <Button
-        android:id="@+id/fab"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="bottom|end"
+        android:layout_alignParentRight="true"
         android:layout_margin="@dimen/fab_margin"
-        android:background="@mipmap/indicator_autocrop"/>
-</FrameLayout>
+        android:text="1/1"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#10000000">
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/fab_margin"
+            android:background="@mipmap/ic_back"/>
+
+        <Button
+            android:id="@+id/download"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/fab_margin"
+            android:background="@mipmap/ic_file_download"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

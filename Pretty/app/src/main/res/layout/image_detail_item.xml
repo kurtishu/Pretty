@@ -1,32 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_centerInParent="true"
-    android:orientation="horizontal">
+    android:layout_centerInParent="true">
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <com.dreamfactory.kurtishu.pretty.widget.PhotoImageView
         android:id="@+id/detail_image_view"
         android:layout_gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        fresco:roundAsCircle="false"
-        fresco:roundedCornerRadius="1dp"
-        fresco:roundTopLeft="true"
-        fresco:roundTopRight="false"
-        fresco:roundBottomLeft="false"
-        fresco:roundBottomRight="true"
+        android:layout_margin="10dp"
         />
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="10dp"
-        android:visibility="gone"
-        android:textAppearance="?attr/textAppearanceListItem"/>
-
-</android.support.v7.widget.CardView>
+</RelativeLayout>
