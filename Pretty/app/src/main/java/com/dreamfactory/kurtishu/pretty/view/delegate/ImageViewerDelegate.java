@@ -45,6 +45,7 @@ public class ImageViewerDelegate extends BaseAppDelegate implements View.OnClick
     private ImageViewerAdapter imageAdapter;
     private Button btnDownload;
     private TextView tvCount;
+    private int totalCount;
 
     @Override
     public int getRootLayoutId() {
@@ -61,11 +62,31 @@ public class ImageViewerDelegate extends BaseAppDelegate implements View.OnClick
         mRecyclerViewPager = get(R.id.image_detail_list);
         imageAdapter = new ImageViewerAdapter(context);
         mRecyclerViewPager.setAdapter(imageAdapter);
+        mRecyclerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                String count = String.format("%d/%d", position + 1, totalCount);
+                tvCount.setText(count);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
 
     public void updateData(List<Picture> list) {
         imageAdapter.setData(list);
+        totalCount = list.size();
+        String count = String.format("1/%d", totalCount);
+        tvCount.setText(count);
     }
 
     @Override
@@ -78,5 +99,5 @@ public class ImageViewerDelegate extends BaseAppDelegate implements View.OnClick
                 break;
         }
     }
-    
+
 }

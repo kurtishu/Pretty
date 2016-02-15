@@ -5,7 +5,7 @@ package com.dreamfactory.kurtishu.pretty.config;
  */
 public class Config {
 
-    public static final boolean ISUSINGMOCKDATA = true;
+    public static final boolean ISUSINGMOCKDATA = false;
 
     public class URL {
         public static final String IMAGE_HOST = "http://tnfs.tngou.net/img";
