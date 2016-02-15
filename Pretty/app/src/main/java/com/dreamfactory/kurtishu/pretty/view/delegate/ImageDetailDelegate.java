@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 
 import com.dreamfactory.kurtishu.pretty.R;
@@ -54,8 +55,25 @@ public class ImageDetailDelegate extends BaseAppDelegate implements Toolbar.OnCl
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSupportZoom(false);
 
-        mWebView.loadUrl("file:///android_asset/index.html");
+        mWebView.addJavascriptInterface(new JavascriptObject(), "obj");
 
+        mWebView.loadUrl("http://kurtishu.github.io/remote/index.html");
+
+    }
+
+    class JavascriptObject {
+
+        @JavascriptInterface
+        public void pageOnLoad() {
+
+            rootView.post(new Runnable() {
+                @Override
+                public void run() {
+                    String javascript = String.format("javascript:loadImg('%s', '%s')", imageUrl, title);
+                    mWebView.loadUrl(javascript);
+                }
+            });
+        }
     }
 
     private CustomWebView.WebViewCallback callback = new CustomWebView.WebViewCallback() {
@@ -71,8 +89,7 @@ public class ImageDetailDelegate extends BaseAppDelegate implements Toolbar.OnCl
 
         @Override
         public void pageStarted() {
-            String javascript = String.format("javascript:loadImg('%s', '%s')", imageUrl, title);
-            mWebView.loadUrl(javascript);
+
         }
     };
 

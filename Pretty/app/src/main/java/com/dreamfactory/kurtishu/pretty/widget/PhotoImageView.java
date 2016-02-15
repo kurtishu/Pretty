@@ -76,7 +76,7 @@ public class PhotoImageView extends ZoomableDraweeView {
 
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setCallerContext(callerContext)
-                .setTapToRetryEnabled(true)
+                .setTapToRetryEnabled(false)
                 .setUri(uri)
                 .setOldController(getController())
                 .build();

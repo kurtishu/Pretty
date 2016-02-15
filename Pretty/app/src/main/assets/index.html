@@ -33,11 +33,11 @@
    <script type="text/javascript">
    
     function loadImg(src, title) {
-	   document.getElementById("image").src = src;
+	   document.getElementById("image").setAttribute("src", src);
 	   document.getElementById("title").innerHTML = title;
 	}
    
-     function changeImag() {
+     function changeImg() {
 	   var ifr = document.createElement('iframe');
        ifr.style.display = 'none';
 	   document.documentElement.appendChild(ifr);
@@ -47,17 +47,22 @@
  </head>
  
    
- <body>
+ <body onload="window.obj.pageOnLoad()">
    <div class="header">
      <div id="title"></div>
    </div>
-   <div class="content" onclick="changeImag()">
+   <div class="content" onclick="changeImg()">
       <img id="image" src="">
    </div>
    
    <div class="comment">
      Add comment here
    </div>
+
+   <!-- UY BEGIN -->
+   <div id="uyan_frame"></div>
+   <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2084054"></script>
+   <!-- UY END -->
 
  </body>
 
