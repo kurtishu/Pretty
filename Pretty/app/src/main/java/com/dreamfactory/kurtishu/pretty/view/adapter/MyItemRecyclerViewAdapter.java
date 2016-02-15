@@ -10,18 +10,12 @@ import android.widget.TextView;
 import com.dreamfactory.kurtishu.pretty.R;
 import com.dreamfactory.kurtishu.pretty.event.NavigatorEvent;
 import com.dreamfactory.kurtishu.pretty.model.Gallery;
-import com.dreamfactory.kurtishu.pretty.utils.ArrayUtil;
 import com.dreamfactory.kurtishu.pretty.utils.UniqueListArray;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import de.greenrobot.event.EventBus;
 
@@ -74,7 +68,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
                 Map params = new HashMap();
                 params.put("id", (Integer)mValues.get(position).id);
                 params.put("img", mValues.get(position).getImg());
-                EventBus.getDefault().postSticky(new NavigatorEvent(params));
+                params.put("title", mValues.get(position).title);
+                EventBus.getDefault().postSticky(new NavigatorEvent(params, false));
             }
         });
     }

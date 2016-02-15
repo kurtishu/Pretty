@@ -81,7 +81,7 @@ public class AboutDelegate extends BaseAppDelegate implements Toolbar.OnClickLis
 
     @Override
     public void onClick(View v) {
-        EventBus.getDefault().post(new NavigatorEvent(null));
+        EventBus.getDefault().post(new NavigatorEvent(null, true));
     }
 
     class LibraryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

@@ -86,12 +86,13 @@ public class MainActivity extends ActivityPresenter<MainDelegate> {
 
     public void onEventMainThread(NavigatorEvent event) {
         // Check null
-        if (null == event) return;
+        if (null == event || event.isFinish()) return;
 
         Map<String, ?> parmas = event.getParams();
         Intent intent = new Intent(this, ImageDetailActivity.class);
         intent.putExtra("id", (Integer)parmas.get("id"));
         intent.putExtra("img", (String)parmas.get("img"));
+        intent.putExtra("title", (String)parmas.get("title"));
         startActivity(intent);
     }
 }
