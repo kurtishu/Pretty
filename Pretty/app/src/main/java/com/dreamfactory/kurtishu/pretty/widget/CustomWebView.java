@@ -23,6 +23,9 @@ import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+
+import com.dreamfactory.kurtishu.pretty.R;
 
 import java.net.URI;
 
@@ -35,24 +38,33 @@ public class CustomWebView extends WebView {
     private static final String SCHEMA = "pretty";
 
     private WebViewCallback callback;
+    private ProgressBar mProgressbar;
 
     public CustomWebView(Context context) {
         super(context);
-        init();
+        init(context);
     }
 
     public CustomWebView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(context);
     }
 
     public CustomWebView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(context);
     }
 
 
-    private void init() {
+    private void init(Context context) {
+        mProgressbar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
+        mProgressbar.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 4, 0, 0));
+        mProgressbar.setMax(100);
+        mProgressbar.setProgressDrawable(getResources().getDrawable(R.drawable.progress_bar_layer));
+        addView(mProgressbar);
+
+        setWebChromeClient(new WebChromeClient());
+
         this.setWebViewClient(new WebViewClient() {
 
             @Override
@@ -78,6 +90,28 @@ public class CustomWebView extends WebView {
                 }
             }
         });
+    }
+
+    public class WebChromeClient extends android.webkit.WebChromeClient {
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            if (newProgress == 100) {
+                mProgressbar.setVisibility(GONE);
+            } else {
+                if (mProgressbar.getVisibility() == GONE)
+                    mProgressbar.setVisibility(VISIBLE);
+                mProgressbar.setProgress(newProgress);
+            }
+            super.onProgressChanged(view, newProgress);
+        }
+    }
+    @Override
+    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+        LayoutParams lp = (LayoutParams) mProgressbar.getLayoutParams();
+        lp.x = l;
+        lp.y = t;
+        mProgressbar.setLayoutParams(lp);
+        super.onScrollChanged(l, t, oldl, oldt);
     }
 
     public void setWebViewCallback(WebViewCallback callback) {

@@ -21,20 +21,19 @@ package com.dreamfactory.kurtishu.pretty.view.delegate;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.dreamfactory.kurtishu.pretty.R;
+import com.dreamfactory.kurtishu.pretty.event.DownloadImageEvent;
+import com.dreamfactory.kurtishu.pretty.event.NavigatorEvent;
 import com.dreamfactory.kurtishu.pretty.model.Picture;
-import com.dreamfactory.kurtishu.pretty.view.adapter.ImageDetailAdapter;
 import com.dreamfactory.kurtishu.pretty.view.adapter.ImageViewerAdapter;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.core.ImagePipeline;
 
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by kurtishu on 12/1/15.
@@ -44,6 +43,7 @@ public class ImageViewerDelegate extends BaseAppDelegate implements View.OnClick
     private ViewPager mRecyclerViewPager;
     private ImageViewerAdapter imageAdapter;
     private Button btnDownload;
+    private Button btnBack;
     private TextView tvCount;
     private int totalCount;
 
@@ -56,7 +56,9 @@ public class ImageViewerDelegate extends BaseAppDelegate implements View.OnClick
     public void initViews(Context context, Intent mIntent) {
 
         btnDownload = get(R.id.download);
+        btnBack = get(R.id.back);
         btnDownload.setOnClickListener(this);
+        btnBack.setOnClickListener(this);
         tvCount = get(R.id.count);
 
         mRecyclerViewPager = get(R.id.image_detail_list);
@@ -93,9 +95,15 @@ public class ImageViewerDelegate extends BaseAppDelegate implements View.OnClick
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.fab:
-
-
+            case R.id.back:
+                EventBus.getDefault().post(new NavigatorEvent(null, true));
+                break;
+            case R.id.download:
+                int pos = mRecyclerViewPager.getCurrentItem();
+                String imageUrl = imageAdapter.getCurrentImgUrl(pos);
+                if (null != imageUrl) {
+                    EventBus.getDefault().post(new DownloadImageEvent(imageUrl));
+                }
                 break;
         }
     }

@@ -61,6 +61,13 @@ public class ImageViewerAdapter extends PagerAdapter {
         return mItems.size();
     }
 
+    public String getCurrentImgUrl(int position) {
+        if (null != mItems.get(position)) {
+            return mItems.get(position).getImg();
+        }
+        return null;
+    }
+
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == object;

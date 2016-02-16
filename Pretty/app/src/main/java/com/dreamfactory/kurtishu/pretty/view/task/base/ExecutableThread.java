@@ -50,7 +50,7 @@ public abstract  class ExecutableThread extends Thread implements ITaskExecute {
             return;
         }
 
-        if (mPostMessage.what != EXECUTE_STATE_SUCCESS) {
+        if (mPostMessage.what == EXECUTE_STATE_FAILURE) {
             postErrorToUI((String) getmPostMessage().obj);
         } else {
             postSuccessToUI(getmPostMessage());

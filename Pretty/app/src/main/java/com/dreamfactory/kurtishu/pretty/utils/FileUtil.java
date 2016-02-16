@@ -18,9 +18,14 @@
 
 package com.dreamfactory.kurtishu.pretty.utils;
 
+import android.os.Environment;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -121,6 +126,32 @@ public class FileUtil {
 
         InputStream is = byteTOInputStream(in);
         return InputStreamTOString(is);
+    }
+
+    public static void writeToFile(InputStream in, String filePath) {
+        FileOutputStream outStream = null;
+        try {
+            outStream = new FileOutputStream(filePath);
+            byte[] data = new byte[BUFFER_SIZE];
+            int count = -1;
+            while((count = in.read(data,0,BUFFER_SIZE)) != -1)
+                outStream.write(data, 0, count);
+
+        } catch (Exception e) {
+           //ignore
+        } finally {
+            closeSteam(outStream);
+        }
+    }
+
+    public static String getSDPath(){
+        File sdDir = null;
+        boolean sdCardExist = Environment.getExternalStorageState()
+                .equals(android.os.Environment.MEDIA_MOUNTED);   //判断sd卡是否存在
+        if   (sdCardExist) {
+            sdDir = Environment.getExternalStorageDirectory();//获取跟目录
+        }
+        return sdDir.toString();
     }
 
     public static void closeSteam(Closeable closeable) {

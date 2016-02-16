@@ -20,13 +20,19 @@ package com.dreamfactory.kurtishu.pretty.view.activity;
 
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 
 import com.dreamfactory.kurtishu.pretty.api.entity.ImageDetail;
+import com.dreamfactory.kurtishu.pretty.event.DownloadImageEvent;
+import com.dreamfactory.kurtishu.pretty.event.NavigatorEvent;
 import com.dreamfactory.kurtishu.pretty.view.base.ActivityPresenter;
 import com.dreamfactory.kurtishu.pretty.view.delegate.ImageViewerDelegate;
+import com.dreamfactory.kurtishu.pretty.view.task.DownloadImagTask;
 import com.dreamfactory.kurtishu.pretty.view.task.ImageDetailTask;
 import com.dreamfactory.kurtishu.pretty.view.task.base.ExecutableThread;
 import com.orhanobut.logger.Logger;
+
+import de.greenrobot.event.EventBus;
 
 public class ImageViewerActivity extends ActivityPresenter<ImageViewerDelegate> {
 
@@ -54,8 +60,32 @@ public class ImageViewerActivity extends ActivityPresenter<ImageViewerDelegate> 
                     ImageDetail imageDetail = (ImageDetail) msg.obj;
                     getViewDelegate().updateData(imageDetail.list);
                 }
+            } else if (msg.what == DownloadImagTask.EXECUTE_STATE_DOWNLOAD_SUCCESS) {
+                Toast.makeText(ImageViewerActivity.this, "" + msg.obj, Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(ImageViewerActivity.this, "Task error!", Toast.LENGTH_LONG).show();
             }
             super.handleMessage(msg);
         }
     };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEventMainThread(NavigatorEvent event) {
+        finish();
+    }
+
+    public void onEventMainThread(DownloadImageEvent event) {
+        new DownloadImagTask(mHandler, event.getImageUrl()).start();
+    }
 }

@@ -7,6 +7,8 @@ public class Config {
 
     public static final boolean ISUSINGMOCKDATA = false;
 
+    public static final String FILEDIR = "/pretty";
+
     public class URL {
         public static final String IMAGE_HOST = "http://tnfs.tngou.net/img";
 
