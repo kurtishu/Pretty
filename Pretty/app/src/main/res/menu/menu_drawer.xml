@@ -21,34 +21,34 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/c1"
-            android:icon="@mipmap/ic_star"
+            android:icon="@android:drawable/ic_menu_gallery"
             android:title="性感美女"/>
         <item
             android:id="@+id/c2"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@android:drawable/ic_menu_agenda"
             android:title="韩日美女"/>
         <item
             android:id="@+id/c3"
-            android:icon="@mipmap/ic_star"
+            android:icon="@android:drawable/ic_menu_crop"
             android:title="丝袜美腿"/>
         <item
             android:id="@+id/c4"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@android:drawable/ic_menu_day"
             android:title="美女照片"/>
 
         <item
             android:id="@+id/c5"
-            android:icon="@mipmap/ic_star"
+            android:icon="@android:drawable/ic_menu_report_image"
             android:title="美女写真"/>
 
         <item
             android:id="@+id/c6"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@android:drawable/ic_menu_slideshow"
             android:title="清纯美女"/>
 
         <item
             android:id="@+id/c7"
-            android:icon="@mipmap/ic_star"
+            android:icon="@android:drawable/ic_menu_report_image"
             android:title="性感车模"/>
     </group>
 

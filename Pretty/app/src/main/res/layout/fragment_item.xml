@@ -18,7 +18,7 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/pretty_image_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
         fresco:roundAsCircle="false"
         fresco:roundedCornerRadius="1dp"
         android:layout_below="@+id/title"
@@ -28,55 +28,10 @@
         fresco:roundBottomLeft="false"
         fresco:roundBottomRight="true"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pretty_image_view"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:id="@+id/linearLayout">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/article_comment_nt"/>
-
-        <TextView
-            android:id="@+id/v_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceListItem"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:src="@mipmap/article_comment_write_nt"/>
-
-        <TextView
-            android:id="@+id/r_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceListItem"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:src="@mipmap/article_like_nt"/>
-
-        <TextView
-            android:id="@+id/like_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?attr/textAppearanceListItem"/>
-
-    </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_below="@+id/linearLayout"
+        android:layout_below="@+id/pretty_image_view"
         android:layout_marginTop="1dp"
-        android:background="@color/theme_color"/>
+        android:background="@color/theme_color_sb"/>
 </RelativeLayout>

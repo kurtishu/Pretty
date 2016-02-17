@@ -57,9 +57,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final ViewHolder mHolder = (ViewHolder) holder;
         mHolder.mTitleView.setText(mValues.get(position).title);
-        mHolder.mVCountView.setText(mValues.get(position).count + "");
-        mHolder.mFCountView.setText(mValues.get(position).fcount + "");
-        mHolder.mRCountView.setText(mValues.get(position).rcount + "");
         Uri uri = Uri.parse(mValues.get(position).getImg());
         mHolder.draweeView.setImageURI(uri);
         mHolder.mView.setOnClickListener(new View.OnClickListener() {
@@ -82,18 +79,12 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mVCountView;
-        public final TextView mRCountView;
-        public final TextView mFCountView;
         public final TextView mTitleView;
         public SimpleDraweeView draweeView;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mVCountView = (TextView) view.findViewById(R.id.v_count);
-            mRCountView = (TextView) view.findViewById(R.id.r_count);
-            mFCountView = (TextView) view.findViewById(R.id.like_count);
             mTitleView = (TextView) view.findViewById(R.id.title);
             draweeView = (SimpleDraweeView)view.findViewById(R.id.pretty_image_view);
             draweeView.setAspectRatio(1.33f);
