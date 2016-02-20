@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">@color/theme_color</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="gray">#a0d4d4d4</color>
     <color name="global_bg">#eeeff3</color>
 
     <color name="theme_color">#ff5341</color>

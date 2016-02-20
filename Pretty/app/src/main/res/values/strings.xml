@@ -5,4 +5,6 @@
 
     <string name="loading">加载中...</string>
     <string name="version" formatted="false">版本 %s (%s)</string>
+
+    <string name="copyrighy"> Kurtis Hu© 2016</string>
 </resources>

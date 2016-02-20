@@ -13,14 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 
 import com.dreamfactory.kurtishu.pretty.R;
 import com.dreamfactory.kurtishu.pretty.api.entity.ImageList;
 import com.dreamfactory.kurtishu.pretty.api.entity.SearchEntity;
-import com.dreamfactory.kurtishu.pretty.db.DBManager;
 import com.dreamfactory.kurtishu.pretty.event.UpdateImageListEvent;
-import com.dreamfactory.kurtishu.pretty.view.adapter.ClasslfyAdapter;
 import com.dreamfactory.kurtishu.pretty.view.adapter.MyItemRecyclerViewAdapter;
 import com.orhanobut.logger.Logger;
 

@@ -1,8 +1,6 @@
 ##美图
 
-本应用是学些了MVP，并且看了《[MVPro](https://github.com/qibin0506/MVPro)》这个开源项目之后突发奇想的完成的。
-
-
+本应用采用了MVP的架构模式，具体参考[MVPro](https://github.com/qibin0506/MVPro) 。 图片很劲爆，并且不定时更新，敬请关注。
 
 ####项目截图
 
@@ -31,7 +29,7 @@ Android Design Support Library 中的 CoordinatorLayout.<br/>
 
 ####下载
  [http://fir.im/pretty](http://fir.im/pretty)
-
+![](https://github.com/KurtisHu/Pretty/blob/master/screenshots/pretty.png)
 
 
 ####开源协议 

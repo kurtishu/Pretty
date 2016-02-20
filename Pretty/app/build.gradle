@@ -9,7 +9,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1
-        versionName "1.2"
+        versionName "1.5"
         manifestPlaceholders = [CHANNEL_VALUE: "GitHub"]
     }
     buildTypes {
@@ -39,7 +39,7 @@ dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'org.apache.commons:commons-collections4:4.1'
     compile 'io.realm:realm-android:0.84.1'
-    compile 'com.lsjwzh:recyclerviewpager:1.0.11-SNAPSHOT'
+    //compile 'com.lsjwzh:recyclerviewpager:1.0.11-SNAPSHOT'
     compile 'com.github.Syehunter:RecyclerViewManager:0.1.1'
     compile 'com.umeng.analytics:analytics:latest.integration'
 }
