@@ -28,7 +28,7 @@ Android Design Support Library 中的 CoordinatorLayout.<br/>
 </p>
 
 ####下载
- [http://fir.im/pretty](http://fir.im/pretty)
+ [http://fir.im/pretty](http://fir.im/pretty)       
  <img src="https://github.com/KurtisHu/Pretty/blob/master/screenshots/pretty.png" width = "100" height = "100" alt="图片名称" align=center />
 
 
