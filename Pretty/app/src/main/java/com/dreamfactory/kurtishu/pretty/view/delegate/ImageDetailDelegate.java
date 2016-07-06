@@ -3,6 +3,7 @@ package com.dreamfactory.kurtishu.pretty.view.delegate;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.JavascriptInterface;
@@ -12,6 +13,7 @@ import com.dreamfactory.kurtishu.pretty.R;
 import com.dreamfactory.kurtishu.pretty.event.NavigatorEvent;
 import com.dreamfactory.kurtishu.pretty.view.activity.ImageViewerActivity;
 import com.dreamfactory.kurtishu.pretty.widget.CustomWebView;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.net.URI;
 
@@ -23,6 +25,7 @@ import de.greenrobot.event.EventBus;
 public class ImageDetailDelegate extends BaseAppDelegate implements Toolbar.OnClickListener {
 
     private CustomWebView mWebView;
+    private SimpleDraweeView mPrettyImage;
     private String imageUrl;
     private String title;
     private int id;
@@ -36,6 +39,7 @@ public class ImageDetailDelegate extends BaseAppDelegate implements Toolbar.OnCl
     @Override
     public void initViews(Context context, Intent mIntent) {
         mWebView = get(R.id.image_webview);
+        mPrettyImage = get(R.id.detail_image_view);
 
         Toolbar toolbar = get(R.id.toolbar);
         toolbar.setTitle(R.string.title_image_detail);
@@ -59,6 +63,13 @@ public class ImageDetailDelegate extends BaseAppDelegate implements Toolbar.OnCl
 
         mWebView.loadUrl("http://kurtishu.github.io/remote/index.html");
 
+        mPrettyImage.setImageURI(Uri.parse(imageUrl));
+        mPrettyImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoImageViewerScreen();
+            }
+        });
     }
 
     class JavascriptObject {
@@ -69,7 +80,7 @@ public class ImageDetailDelegate extends BaseAppDelegate implements Toolbar.OnCl
             rootView.post(new Runnable() {
                 @Override
                 public void run() {
-                    String javascript = String.format("javascript:loadImg('%s', '%s')", imageUrl, title);
+                    String javascript = String.format("javascript:loadImg('%s', '%s')", "", title);
                     mWebView.loadUrl(javascript);
                 }
             });
@@ -80,11 +91,7 @@ public class ImageDetailDelegate extends BaseAppDelegate implements Toolbar.OnCl
 
         @Override
         public void loadingUrl(URI uri) {
-          Intent intent = new Intent(mContext, ImageViewerActivity.class);
-            intent.putExtra("id", id);
-            intent.putExtra("img", imageUrl);
-            intent.putExtra("title", title);
-            mContext.startActivity(intent);
+            gotoImageViewerScreen();
         }
 
         @Override
@@ -96,5 +103,13 @@ public class ImageDetailDelegate extends BaseAppDelegate implements Toolbar.OnCl
     @Override
     public void onClick(View v) {
         EventBus.getDefault().post(new NavigatorEvent(null, true));
+    }
+
+    private void gotoImageViewerScreen() {
+        Intent intent = new Intent(mContext, ImageViewerActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("img", imageUrl);
+        intent.putExtra("title", title);
+        mContext.startActivity(intent);
     }
 }

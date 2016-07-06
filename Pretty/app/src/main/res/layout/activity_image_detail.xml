@@ -22,8 +22,16 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.dreamfactory.kurtishu.pretty.widget.CustomWebView
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/detail_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="fitStart"
         android:layout_below="@id/toolbar_layout"
+        />
+
+    <com.dreamfactory.kurtishu.pretty.widget.CustomWebView
+        android:layout_below="@id/detail_image_view"
         android:id="@+id/image_webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
